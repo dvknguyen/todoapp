@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: blueviolet;
+}
+
+.app {
+  background-color: white;
+  box-shadow: rgb(0, 0, 0, 0.8) 10px 30px 24px transparent;
+  border-radius: 10px;
+  padding: 10px;
+  width: 800px;
+  margin-top: 20px;
+}
+
+.list-header {
+  color: rosybrown;
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  border-bottom: gray solid 1px;
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+}
+
+.button-container button {
+  padding: 10px;
+  margin: 10px;
+  background-color: transparent;
+  border-radius: 15px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: 'translateX(-50%, -50%)';
+  background-color: gold;
+  padding: 50px;
+  z-index: 1000;
+
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
