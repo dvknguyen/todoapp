@@ -1,43 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-function Modal({ open, onClose }) {
-  const mode = "create";
-  const handleChange = () => {
-    console.log("changing");
+function Modal({ mode, open, onClose }) {
+  const [data, setData] = useState({
+    user_email: "duy@duy.de",
+    task_title: "",
+    progress: 0,
+    deadline: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((data) => ({
+      ...data,
+      [name]: value,
+    }));
   };
   if (!open) {
     return null;
   }
+
+  const postData = async (e) => {
+    e.preventDefault();
+    try {
+      const repsonse = await fetch("http://localhost:8000/todos/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      console.log(repsonse);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(data);
   return ReactDOM.createPortal(
     <>
       <div className="overlay">
         <div className="modal">
-          <h1>Let's {mode} your task!</h1>
-          <button onClick={onClose}>X</button>
+          <div className="modal-header">
+            <h1>Let's {mode} your task!</h1>
+            <button onClick={onClose}>X</button>
+          </div>
           <form>
-            <input
-              required
-              type="text"
-              name="taskTitle"
-              maxLength={30}
-              placeholder="Name of your task"
-              onChange={handleChange}
-            />
-            <input
-              required
-              type="text"
-              name="Task Description"
-              maxLength={255}
-              placeholder="Describe your task"
-            />
-            <input
-              required
-              type="date"
-              name="Task Description"
-              maxLength={255}
-              placeholder="Describe your task"
-            />
+            <div className="form-container">
+              <input
+                required
+                type="text"
+                name="task_title"
+                maxLength={50}
+                value={data.task_title}
+                placeholder="Name of your task"
+                onChange={handleChange}
+              />
+              <input
+                required
+                type="number"
+                name="progress"
+                value={data.progress}
+                placeholder="Your progress"
+                onChange={handleChange}
+              />
+              <input
+                required
+                type="text"
+                name="deadline"
+                maxLength={255}
+                value={data.deadline}
+                onChange={handleChange}
+              />
+            </div>
+            <input type="submit" onClick={postData} />
           </form>
         </div>
       </div>

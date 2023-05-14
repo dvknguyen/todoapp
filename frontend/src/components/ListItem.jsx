@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import Modal from "./Modal";
 
 function ListItem({ item }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <>
       <div className="list-item">
         <div>{item.title}</div>
         <div>
-          <button>EDIT</button>
+          <button onClick={() => setIsOpen(true)}>EDIT</button>
+          <Modal mode={"edit"} open={isOpen} onClose={() => setIsOpen(false)} />
           <button>DELETE</button>
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function ListHeader({ title }) {
         <button className="add" onClick={() => setIsOpen(true)}>
           ADD
         </button>
-        <Modal open={isOpen} onClose={() => setIsOpen(false)} />
+        <Modal mode={"create"} open={isOpen} onClose={() => setIsOpen(false)} />
         <button className="signout">SIGN OUT</button>
       </div>
     </div>
