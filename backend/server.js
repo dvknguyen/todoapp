@@ -20,9 +20,10 @@ app.get("/todos/:userEmail", async (req, res) => {
     console.log(error);
   }
 });
-
+//test
 app.post("/todos", (req, res) => {
   const id = uuidv4();
+  const id2 = uuidv4();
   const { user_email, task_title, progress, deadline } = req.body;
   console.log(id, user_email, task_title, progress, deadline);
   try {
