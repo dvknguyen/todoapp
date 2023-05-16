@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 
-function Modal({ mode, open, onClose }) {
+function Modal({ mode, open, onClose, getData }) {
   const [data, setData] = useState({
     user_email: "duy@duy.de",
     task_title: "",
@@ -23,18 +23,21 @@ function Modal({ mode, open, onClose }) {
   const postData = async (e) => {
     e.preventDefault();
     try {
-      const repsonse = await fetch("http://localhost:8000/todos/", {
+      const response = await fetch("http://localhost:8000/todos/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      console.log(repsonse);
+
+      if (response.status === 200) {
+        onClose();
+        getData();
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(data);
   return ReactDOM.createPortal(
     <>
       <div className="overlay">
